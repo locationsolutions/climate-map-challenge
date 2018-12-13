@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import Metolib from '@fmidev/metolib';
 import './App.css';
-import {Map, Marker, Popup, TileLayer} from "react-leaflet";
+import {Map, Marker, TileLayer} from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
-
+import Sidebar from './Sidebar';
 
 const MapContainer = styled(Map)`
-    width: 100vw;
+    width: calc(100vw - 300px);
     height: 100vh;
+    position:absolute;
+    top:0px;
+    left:300px;
 `;
 
 
@@ -21,16 +24,12 @@ L.Icon.Default.mergeOptions({
 });
 
 
-class App extends Component {
-    constructor() {
-        super();
+function App() {
+    const [observationLocations, setObservationLocations] = useState([]);
 
-        this.state = {
-            observationLocations: []
-        }
-    }
+    const [selectedLocation, setSelectedLocation] = useState(null);
 
-    componentDidMount() {
+    useEffect(function fetchObservationLocations() {
         const connection = new Metolib.WfsConnection();
         if (connection.connect('http://opendata.fmi.fi/wfs', 'fmi::observations::weather::cities::multipointcoverage')) {
             connection.getData({
@@ -47,42 +46,42 @@ class App extends Component {
                         });
                         return;
                     }
-                    this.setState({
-                        observationLocations: data.locations
-                            .map(loc => {
-                                const [lon, lat] = loc.info.position.map(parseFloat);
-                                return {...loc, position: {lat, lon}}
-                            })
-                    });
+
+                    setObservationLocations(data.locations
+                        .map(loc => {
+                            const [lon, lat] = loc.info.position.map(parseFloat);
+                            return {...loc, position: {lat, lon}}
+                        })
+                    );
 
                     connection.disconnect();
                 }
             });
         }
-    }
+    }, []);
 
-    render() {
+    const position = [65, 26];
+    const map = (
+        <MapContainer center={position} zoom={6}>
+            <TileLayer
+                url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                subdomains='abcd'
+                maxZoom={19}
+            />
+            {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
+                                                     key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
+            </Marker>)}
+        </MapContainer>
+    );
 
-        const position = [65, 26];
-        console.log(this.state.observationLocations);
-        const map = (
-            <MapContainer center={position} zoom={6}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                {this.state.observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-                                                                    key={loc.info.id}>
-                </Marker>)}
-            </MapContainer>
-        );
+    return (
+        <div className="App">
+            <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
+            {map}
+        </div>
+    );
 
-        return (
-            <div className="App">
-                {map}
-            </div>
-        );
-    }
 }
 
 export default App;
