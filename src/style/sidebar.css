@@ -1,0 +1,15 @@
+.sidebar > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
