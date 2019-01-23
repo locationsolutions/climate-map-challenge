@@ -1,5 +1,5 @@
-import formatDateTime from "./formatDateTime";
 import { observeHours } from "../var";
+import formatDateTime from "./formatDateTime";
 import calcAverage from "./calcAverage";
 import defineLabel from "./defineLabel";
 

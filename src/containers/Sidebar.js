@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { number, arrayOf, oneOfType, object, shape, string } from "prop-types";
 import styled from "styled-components";
+
 import TimeValueArea from "../components/TimeValueArea";
 import DateValue from "../components/DateValue";
-import constructAreaChartData from "../util/constructAreaChartData";
-import handleChartSetter from "../util/handleChartSetter";
 import Form from "./Form";
 import Info from "../components/Info";
+
+import constructAreaChartData from "../util/constructAreaChartData";
+import handleChartSetter from "../util/handleChartSetter";
 
 function Sidebar({
   selectedLocation,

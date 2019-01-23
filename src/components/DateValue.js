@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   Legend
 } from "recharts";
+
 import defineLabel from "../util/defineLabel";
 
 const DateValue = ({ data = [], type }) => (

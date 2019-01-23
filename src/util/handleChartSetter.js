@@ -1,6 +1,6 @@
+import { defaultType } from "../var";
 import constructAreaChartData from "./constructAreaChartData";
 import constructComposedChartData from "./constructComposedChartData";
-import { defaultType } from "../var";
 
 export default (arr, id, type, setter) => {
   let clone = [...arr];

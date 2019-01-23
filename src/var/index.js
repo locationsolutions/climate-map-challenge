@@ -7,7 +7,9 @@ export const defaultLayer = "Mapnik";
 
 export const defaultType = "t";
 
-export const observeHours = 24 * 6;
+export const observeDays = 6;
+
+export const observeHours = 24 * observeDays;
 
 // for clicked icon
 export const iconUrl = require("../img/icons8-marker-100.png");

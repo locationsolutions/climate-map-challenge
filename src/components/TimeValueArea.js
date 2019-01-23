@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+
 import defineLabel from "../util/defineLabel";
 
 const TimeValueArea = ({ data = [], type }) => {

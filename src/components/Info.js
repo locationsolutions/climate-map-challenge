@@ -24,7 +24,7 @@ const Info = ({ data }) => {
           <span>{lon}</span>
         </p>
       </div>
-      {!region ? <pre>Choose location from Map</pre> : null}
+      {!region ? <pre>*Choose location from Map</pre> : null}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { defaultType } from "../var";
 import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+
+import { defaultType } from "../var";
 
 const Button = styled.button`
   background: white;

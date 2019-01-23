@@ -9,8 +9,10 @@ import {
   CircleMarker,
   Tooltip
 } from "react-leaflet";
+import { ReactLeafletSearch } from "react-leaflet-search";
 import L from "leaflet";
 import styled from "styled-components";
+
 import {
   attribution,
   layerOptions,
@@ -19,7 +21,6 @@ import {
   defaultLayer
 } from "../var";
 import "../style/map.css";
-import { ReactLeafletSearch } from "react-leaflet-search";
 
 // Ugly hack to fix Leaflet icons with leaflet loaders
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,7 +31,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const MapContainer = styled(LeafletMap)`
-  height: 100vh;
+  height: 120vh;
 `;
 
 const Map = ({ observeLocations, selectedLocation, setSelectedLocation }) => {

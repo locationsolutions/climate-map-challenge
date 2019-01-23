@@ -1,7 +1,9 @@
 import formatDateTime from "./formatDateTime";
 import calcAverage from "./calcAverage";
+import { observeDays } from "../var";
 
 export default (data, type) => {
+  // get all min, max, average of all regions by day
   const allRegionsData = data.map((region, i) => {
     const pairs = region.data[type].timeValuePairs;
     const dateValuePairs = pairs.map(({ time, value }) => {
@@ -28,8 +30,9 @@ export default (data, type) => {
     return regionMinMaxAvg;
   });
 
+  // calculate average of all min, max, average for each days
   const finalData = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < observeDays + 1; i++) {
     if (allRegionsData && allRegionsData.length) {
       const { date } = allRegionsData && allRegionsData[0][i];
       const oneDayMin = allRegionsData.map(

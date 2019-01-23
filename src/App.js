@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./style/app.css";
+
 import fetchObservationLocation from "./util/fetchObservationLocations";
 import Sidebar from "./containers/Sidebar";
 import Map from "./containers/Map";
