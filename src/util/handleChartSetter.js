@@ -7,7 +7,10 @@ export default (arr, id, type, setter) => {
   if (id) {
     clone = arr.filter(a => a.info.id === id);
   }
-  const data = constructAreaChartData(clone, type || defaultType);
+  const { data, selectedLocInfo } = constructAreaChartData(
+    clone,
+    type || defaultType
+  );
   const composedData = constructComposedChartData(clone, type || defaultType);
-  setter({ data, composedData, type: type || defaultType });
+  setter({ data, composedData, type: type || defaultType, selectedLocInfo });
 };

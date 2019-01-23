@@ -30,11 +30,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const MapContainer = styled(LeafletMap)`
-  // width: calc(100vw - 300px);
   height: 100vh;
-  // position: absolute;
-  // top: 0px;
-  // left: 40%;
 `;
 
 const Map = ({ observeLocations, selectedLocation, setSelectedLocation }) => {

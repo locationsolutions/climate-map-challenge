@@ -5,7 +5,7 @@ export default setter => {
   const connection = new Metolib.WfsConnection();
   if (
     connection.connect(
-      "http://opendata.fmi.fi/wfs",
+      "https://opendata.fmi.fi/wfs",
       "fmi::observations::weather::cities::multipointcoverage"
     )
   ) {

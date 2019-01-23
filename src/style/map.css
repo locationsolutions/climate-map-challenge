@@ -1,10 +1,9 @@
 @keyframes fade {
-    from {
-      opacity: 0.3;
-    }
+  from {
+    opacity: 0.3;
   }
-  
-  .blinking {
-    animation: fade 1s infinite alternate;
-  }
-  
+}
+
+.blinking {
+  animation: fade 1s infinite alternate;
+}

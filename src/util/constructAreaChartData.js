@@ -1,6 +1,7 @@
 import formatDateTime from "./formatDateTime";
 import { observeHours } from "../var";
 import calcAverage from "./calcAverage";
+import defineLabel from "./defineLabel";
 
 export default (data, type) => {
   const groupType = [];
@@ -16,9 +17,12 @@ export default (data, type) => {
       const { average } = calcAverage(allCitiesPair, false);
       groupType.push({
         time: formatDateTime(time),
-        [type]: average
+        [defineLabel(type).name]: average
       });
     }
   }
-  return groupType;
+  return {
+    data: groupType,
+    selectedLocInfo: data.length === 1 ? data[0] : {}
+  };
 };

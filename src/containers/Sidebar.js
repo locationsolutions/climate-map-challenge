@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { number, arrayOf, oneOfType, object, shape, string } from "prop-types";
 import styled from "styled-components";
-import TimeValueArea from "./TimeValueArea";
-import DateValue from "./DateValue";
+import TimeValueArea from "../components/TimeValueArea";
+import DateValue from "../components/DateValue";
 import constructAreaChartData from "../util/constructAreaChartData";
 import handleChartSetter from "../util/handleChartSetter";
-import Form from "../containers/Form";
-import { faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../style/sidebar.css";
+import Form from "./Form";
+import Info from "../components/Info";
 
 function Sidebar({
   selectedLocation,
@@ -19,13 +17,17 @@ function Sidebar({
   const [chartData, setChartData] = useState({
     data: [],
     composedData: [],
+    selectedLocInfo: {},
     type: ""
   });
 
-  useEffect(() => {
-    const { type } = chartData;
-    handleChartSetter(observeLocations, selectedLocation, type, setChartData);
-  }, [observeLocations, selectedLocation]);
+  useEffect(
+    () => {
+      const { type } = chartData;
+      handleChartSetter(observeLocations, selectedLocation, type, setChartData);
+    },
+    [observeLocations, selectedLocation]
+  );
 
   const handleType = type =>
     handleChartSetter(observeLocations, selectedLocation, type, setChartData);
@@ -36,17 +38,16 @@ function Sidebar({
     setChartData({ data, type });
   };
 
-  const { data, composedData, type } = chartData;
+  const { data, composedData, type, selectedLocInfo } = chartData;
 
   return (
     <div className={className}>
-      <div>
-        <button disabled={!selectedLocation} onClick={setData}>
-          <FontAwesomeIcon icon={faGlobeEurope} />
-          All Regions
-        </button>
-        <Form submit={handleType} />
-      </div>
+      <Form
+        submit={handleType}
+        selectedLocation={selectedLocation}
+        handleClick={setData}
+      />
+      <Info data={selectedLocInfo} />
       <TimeValueArea data={data} type={type} />
       <DateValue data={composedData} type={type} />
     </div>
@@ -54,8 +55,10 @@ function Sidebar({
 }
 
 export default styled(Sidebar)`
-  // width: 50%;
-  height: 100vh;
+  & > div:first-child {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 Sidebar.propTypes = {

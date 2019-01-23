@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
 import fetchObservationLocation from "./util/fetchObservationLocations";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./containers/Sidebar";
 import Map from "./containers/Map";
 
 const App = () => {
