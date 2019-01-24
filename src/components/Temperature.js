@@ -6,7 +6,7 @@ import styled from "styled-components";
 // styled-componets library, I guess.
 function Temperature({timeStamp, temp, bgColor, className}) {
 
-  const date = new Date(timeStamp).toISOString().slice(0, 10);
+  const date = new Date(timeStamp).toISOString().slice(0, 13);
 
   return (<div className={className}>
     <p>{date}</p>

@@ -40,6 +40,12 @@ and the new one removes all the unnecessary properties, leaving only the relevan
 timestamp and temperature value)).
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+Custom Logic
+
+I simply made the sidebar show some hourly temperature data (going back a few days), along with the place name and coordinates.
+The color of the temperature info items changes based on the measured temperature (the colder the temp, the bluer the background gets).
+
+---------------------------------------------------------------------------------------------------------------------------------------
 Notes:
 
 1. The country and timezone fields are empty in the data that's coming from the server. Although my priorities were elsewhere, I'm pretty sure that could be fixed somehow.

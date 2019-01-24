@@ -55,7 +55,7 @@ function App() {
             const placeName = loc.info.name;
             const temps = loc.data.t.timeValuePairs;
 
-            obsMap.set(loc.info.id, { position: pos, placeName: placeName, temps: temps });
+            obsMap.set(loc.info.id, { position: pos, placeName: placeName, temps: temps.reverse() }); // latest temps need to be first
           }); // forEach
 
           setObservations(obsMap);
