@@ -1,0 +1,63 @@
+
+Report on the Climate Map Challenge assignment
+
+Ville Lohkovuori
+villeloh@metropolia.fi
+https://villeloh.github.io
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Errors that I observed / fixed before beginning:
+
+1. Running npm install, there was a warning about one high security vulnerability; I ran 'npm audit fix' as suggested, and it seems
+to have resolved it.
+
+2. Although I've heard about it, I haven't used the styled-components library before.
+It seems there's a warning about an unpassed className prop unless you explicitly pass one  
+to a custom React component. The Sidebar component wasn't receiving its styles on account of this error, which I 
+fixed by passing it an arbitrary className ('sidebar'). Imo, this kind of stuff should be done automatically, 
+as the error can be very confusing for new users.
+
+3. The info markers did not appear in Finland, but somewhere near Iran, instead. I fixed this by flipping around the latitude and longitude in 
+the setObservationLocations() call in App.js.
+
+4. Fixed a typo in 'getSelectedLocationId' function in locationGetter.js (and its call site); was 'getSelectedLocatoinId'.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Refactoring changes:
+
+1. I'm not sure what purpose the getSelectedLocationId function serves in the app. If I use it in the Sidebar component (as is done by default in the project), 
+it takes two clicks to update the fetched info when clicking on a new marker, which is clearly not the desired behavior. I haven't used 'useRef' before, but 
+as I've understood it from the React docs, it's meant to keep a reference to an 'instance variable' amid React's re-rendering shenanigans. If I remove 
+the call to getSelectedLocationId and just use the plain selectedLocationId in the Sidebar component, the marker info updates with one click, so I did that. 
+If it is a misstep, I'm curious to know the reason.
+
+2. I moved components to their own folder, as well as utilities (LocationGetter; although it isn't used anymore, I was hesitant to delete it. 
+In a real project I would keep it and add a note about the non-use, as I did here.).
+
+3. In App.js, I replaced 'observationLocations' with 'observations', with each observation stored in a (default js, not Leaflet) Map with the ids as keys and all the 
+interesting properties in an object under the key. The original structure was named a bit misleadingly (as it contained a lot more than just the location, i.e., coordinates), 
+and the new one removes all the unnecessary properties, leaving only the relevant ones (position, place name + temperatures over time (stored in an array of objects with two fields: 
+timestamp and temperature value)).
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Notes:
+
+1. The country and timezone fields are empty in the data that's coming from the server. Although my priorities were elsewhere, I'm pretty sure that could be fixed somehow.
+
+2. In the end I only used one of the api fetches that were present in the project (temperature), as I literally could not find the page with all the listed options anywhere 
+on the Ilmatieteenlaitos site. Rather than spend time combing through their terrible docs, I decided to work with what I had available. Maybe I missed something obvious; but in 
+any case the person who named their rainfall property 'r_1h' should be fired on the spot.
+
+3. I did all the code changes without version control, as this was such a small and quick project. Hope that's ok with you; I do of course use Github for any serious project.
+
+4. I hadn't encountered the 'useX' pattern before, which was a major contributor to my time issues; but it was *so* worth learning in the end!
+It will make my future projects so much less convoluted / cluttered. So, thank you. :)
+
+5. Last but not least, I'm painfully aware of the overflow issue with the sidebar. I'd have made it into a scrollable component, but again, time issues.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Conclusion
+
+It was a fun little challenge; with more time I could've done more, but I'm proud of what I was able to achieve on such short notice, working 
+with mostly all-new technologies (never used Leaflet or the fmi api before, either). I've been learning about React for about a year now, 
+and it's fun to notice how I can easily tell what causes most errors nowadays. I wouldn't mind getting paid to work on projects that are similar to this one. :)
