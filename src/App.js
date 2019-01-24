@@ -1,19 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Metolib from '@fmidev/metolib';
 import './App.css';
-import {Map, Marker, TileLayer} from "react-leaflet";
-import styled from "styled-components";
+import { Marker } from "react-leaflet";
 import L from "leaflet";
-import Sidebar from './Sidebar';
+import Sidebar from './components/Sidebar';
+import WeatherMap from './components/WeatherMap';
 
-const MapContainer = styled(Map)`
-    width: calc(100vw - 300px);
-    height: 100vh;
-    position:absolute;
-    top:0px;
-    left:300px;
-`;
-
+/**
+ * modified by: Ville Lohkovuori
+ * villeloh@metropolia.fi
+ */
 
 // Ugly hack to fix Leaflet icons with leaflet loaders
 delete L.Icon.Default.prototype._getIconUrl;
@@ -23,19 +19,22 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+const DEFAULT_ZOOM = 6;
+const MAP_CENTER = [65, 26];
 
 function App() {
-  const [observationLocations, setObservationLocations] = useState([]);
 
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [observations, setObservations] = useState(new Map());
 
   useEffect(function fetchObservationLocations() {
+
     const connection = new Metolib.WfsConnection();
     if (connection.connect('http://opendata.fmi.fi/wfs', 'fmi::observations::weather::cities::multipointcoverage')) {
       connection.getData({
         begin: Date.now() - 60e3 * 60 * 24 * 6,
         end: Date.now(),
-        requestParameter: "t,snowdepth,r_1h",
+        requestParameter: "t",
         timestep: 60 * 60 * 1000,
         bbox: "20.6455928891, 59.846373196, 31.5160921567, 70.1641930203",
         callback: (data, errors) => {
@@ -47,41 +46,45 @@ function App() {
             return;
           }
 
-          setObservationLocations(data.locations
-            .map(loc => {
-              const [lon, lat] = loc.info.position.map(parseFloat);
-              return {...loc, position: {lat, lon}}
-            })
-          );
+          const obsMap = new Map();
+          data.locations.forEach(loc => {
+
+            const [lat, lon] = loc.info.position.map(parseFloat);
+            const pos = { lat: lat, lon: lon};
+
+            const placeName = loc.info.name;
+            const temps = loc.data.t.timeValuePairs;
+
+            obsMap.set(loc.info.id, { position: pos, placeName: placeName, temps: temps.reverse() }); // latest temps need to be first
+          }); // forEach
+
+          setObservations(obsMap);
 
           connection.disconnect();
-        }
-      });
-    }
-  }, []);
+        } // callback
+      }); // getData
+    } // outer if
+  }, []); // useEffect / fetchObservationLocations
 
-  const position = [65, 26];
-  const map = (
-    <MapContainer center={position} zoom={6}>
-      <TileLayer
-        url='https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-        attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        subdomains='abcd'
-        maxZoom={19}
-      />
-      {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-                                               key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
-      </Marker>)}
-    </MapContainer>
-  );
+  // it needs to be an array to work with React's syntax...
+  const markers = [];
+  observations.forEach( (obs, key) => {
+
+    markers.push(
+      <Marker 
+        position={[obs.position.lat, obs.position.lon]}
+        key={key} 
+        onClick={() => setSelectedLocation(key)}>
+      </Marker>);
+  });
 
   return (
     <div className="App">
-      <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
-      {map}
+      <Sidebar selectedLocationId={selectedLocation} observations={observations} className="sidebar"/>
+      <WeatherMap center={MAP_CENTER} markers={markers} zoom={DEFAULT_ZOOM} className="weather-map" />
     </div>
   );
 
-}
+} // App
 
 export default App;

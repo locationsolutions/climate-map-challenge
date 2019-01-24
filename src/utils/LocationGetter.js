@@ -1,6 +1,7 @@
 import {useRef, useEffect} from 'react';
 
-function getSelectedLocatoinId(value) {
+// not used anywhere atm (see note in assignment.txt)
+function getSelectedLocationId(value) {
     const ref = useRef();
     useEffect(() => {
         ref.current = value;
@@ -8,4 +9,4 @@ function getSelectedLocatoinId(value) {
     return ref.current;
 }
 
-export default getSelectedLocatoinId;
+export default getSelectedLocationId;
