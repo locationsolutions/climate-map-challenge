@@ -6,6 +6,11 @@ import L from "leaflet";
 import Sidebar from './components/Sidebar';
 import WeatherMap from './components/WeatherMap';
 
+/**
+ * modified by: Ville Lohkovuori
+ * villeloh@metropolia.fi
+ */
+
 // Ugly hack to fix Leaflet icons with leaflet loaders
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
