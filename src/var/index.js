@@ -3,8 +3,6 @@ export const attribution =
 
 export const defaultCoordinate = { lat: 64, lng: 27 };
 
-export const defaultLayer = "Mapnik";
-
 export const defaultType = "t";
 
 export const observeDays = 6;
@@ -37,3 +35,5 @@ export const layerOptions = [
     url: "https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg"
   }
 ];
+
+export const defaultLayer = layerOptions[0].name;

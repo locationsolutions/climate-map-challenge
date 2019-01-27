@@ -20,7 +20,7 @@ export default (data, type) => {
     const keys = Object.keys(seen);
     const regionMinMaxAvg = keys.map(date => {
       const { average, arr } = calcAverage(seen[date]);
-      if (!average) {
+      if (average === undefined) {
         return { date, min: NaN, max: NaN, average: NaN };
       }
       const min = Math.min(...arr);
@@ -29,12 +29,14 @@ export default (data, type) => {
     });
     return regionMinMaxAvg;
   });
-
   // calculate average of all min, max, average for each days
   const finalData = [];
   for (let i = 0; i < observeDays + 1; i++) {
     if (allRegionsData && allRegionsData.length) {
-      const { date } = allRegionsData && allRegionsData[0][i];
+      const { date } =
+        allRegionsData &&
+        allRegionsData[0][i] !== undefined &&
+        allRegionsData[0][i];
       const oneDayMin = allRegionsData.map(
         region => region[i] && region[i].min
       );

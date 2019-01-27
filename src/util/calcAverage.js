@@ -1,8 +1,12 @@
-export default (arr, arrContainsNumbersOnly = true) => {
-  if (arr) {
-    const truthy = !arrContainsNumbersOnly
-      ? arr.filter(item => item && !isNaN(item.value)).map(v => v.value)
-      : arr.filter(v => !isNaN(v));
+export default arr => {
+  if (Array.isArray(arr)) {
+    if (!arr.length) {
+      return { average: undefined };
+    }
+    const truthy =
+      typeof arr[0] === "number"
+        ? arr.filter(v => !isNaN(v))
+        : arr.filter(item => item && !isNaN(item.value)).map(v => v.value);
 
     const len = truthy.length;
     if (!len) {

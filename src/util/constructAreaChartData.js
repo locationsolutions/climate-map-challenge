@@ -14,7 +14,7 @@ export default (data, type) => {
     });
 
     if (allCitiesPair.length) {
-      const { average } = calcAverage(allCitiesPair, false);
+      const { average } = calcAverage(allCitiesPair);
       groupType.push({
         time: formatDateTime(time),
         [defineLabel(type).name]: average
