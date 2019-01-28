@@ -7,7 +7,6 @@ import DateValue from "../components/DateValue";
 import Form from "./Form";
 import Info from "../components/Info";
 
-import constructAreaChartData from "../util/constructAreaChartData";
 import handleChartSetter from "../util/handleChartSetter";
 
 function Sidebar({
@@ -34,11 +33,7 @@ function Sidebar({
   const handleType = type =>
     handleChartSetter(observeLocations, selectedLocation, type, setChartData);
 
-  const setData = () => {
-    const data = constructAreaChartData(observeLocations, type);
-    clearSelectedLocation();
-    setChartData({ data, type });
-  };
+  const reset = () => clearSelectedLocation();
 
   const { data, composedData, type, selectedLocInfo } = chartData;
 
@@ -47,7 +42,7 @@ function Sidebar({
       <Form
         submit={handleType}
         selectedLocation={selectedLocation}
-        handleClick={setData}
+        handleClick={reset}
       />
       <Info data={selectedLocInfo} />
       <TimeValueArea data={data} type={type} />
