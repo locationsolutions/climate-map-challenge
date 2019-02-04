@@ -22,7 +22,6 @@ export default setter => {
           });
           return;
         }
-
         setter(
           data.locations.map(loc => {
             const [lat, lon] = loc.info.position.map(parseFloat);

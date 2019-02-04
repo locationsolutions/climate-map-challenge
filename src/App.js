@@ -10,11 +10,23 @@ const App = () => {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  useEffect(() => fetchObservationLocation(setObservationLocations), []);
+  useEffect(() => {
+    fetchObservationLocation(setObservationLocations);
+    const interval = setInterval(() => {
+      fetchObservationLocation(setObservationLocations);
+    }, 30 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const clearSelectedLocation = () => {
     setSelectedLocation(null);
   };
+
+  console.log(
+    observeLocations[60] &&
+      observeLocations[60].data["t"] &&
+      observeLocations[60].data["t"].timeValuePairs[144]
+  );
 
   return (
     <div className="App">

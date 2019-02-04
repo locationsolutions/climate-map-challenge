@@ -21,7 +21,10 @@ const TimeValueArea = ({ data = [], type }) => {
         margin={{ top: 40, right: 30, left: 20, bottom: 20 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" tickFormatter={value => value.substr(0, 2)} />
+        <XAxis
+          dataKey="time"
+          tickFormatter={value => value.substr(0, value.indexOf("/"))}
+        />
         <YAxis
           label={{
             value: unit,
