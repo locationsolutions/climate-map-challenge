@@ -1,0 +1,23 @@
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 35px;
+}
+
+.info > p {
+  margin-top: -7px;
+}
+
+.info > p > span:first-child {
+  font-size: 0.85em;
+}
+
+pre {
+  color: red;
+  width: 70%;
+  margin: 0 auto;
+  font-size: 0.8em;
+  margin-top: -10px;
+}

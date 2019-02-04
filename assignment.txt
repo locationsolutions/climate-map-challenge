@@ -1,0 +1,26 @@
+Fixing bugs:
+
+- Coordinate bug.
+- Change api link to https
+
+Map:
+
+- Add options to change tile layer
+- Add search box for region name
+- A click in the map will change the center of the map
+- Hovering the clicked position show latlng
+- Popup show region name
+- A click on marker creates its animation
+
+Sidebar:
+
+- At first time mounting
+-- Area chart:
+--- Average t/r_1h/snowdepth over past 145 hours for all regions
+-- Composed chart:
+--- Min, Max, Average t/r_1h/snowdepth over past 7 days for all regions
+
+- Map-sidebar interactivy:
+-- Choose region by clicking on marker will change data on two charts and display region's info.
+-- Click All regions to back to all regions data.
+-- Choose type of data to display (t/r_1h/snowdepth) through select options.
