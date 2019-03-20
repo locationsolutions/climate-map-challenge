@@ -16,12 +16,14 @@ L.Icon.Default.mergeOptions({
 });
 
 const THEME_OPTIONS = ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    'https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png'
 ]
 function App() {
   const [observationLocations, setObservationLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [defaultTheme, setTheme] = useState(1);
+  const [defaultTheme, setTheme] = useState(0);
 
   useEffect(() => FetchObservationLocations(setObservationLocations), []);
 

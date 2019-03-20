@@ -7,10 +7,10 @@ const StyledDiv = styled.div`
    background-color: red;
    display: inline;
    text-align: center;
-   padding-top: 25%;
+   padding-top: 10%;
 `
 const StyledLabel = styled.label`
-  display: inline;
+  display: block;
   position: relative;
   padding-left:35px;
   margin-bottom: 12px;
@@ -56,7 +56,7 @@ const StyledSpan = styled.span`
     display: none;
   }
 `
-const THEME_OPTIONS = ['Dark', 'Bright']
+const THEME_OPTIONS = ['Dark All', 'Alidade Smooth', 'Alidade Smooth_Dark', 'Outdoors']
 
 export default function ThemeComponent ({setTheme}) {
     const handleThemeSelection = e => {
