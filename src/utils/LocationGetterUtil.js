@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react';
 
-function getSelectedLocatoinId(value) {
+function getSelectedLocationId(value) {
     const ref = useRef();
     useEffect(() => {
         ref.current = value;
@@ -8,4 +8,4 @@ function getSelectedLocatoinId(value) {
     return ref.current;
 }
 
-export default getSelectedLocatoinId;
+export default getSelectedLocationId;

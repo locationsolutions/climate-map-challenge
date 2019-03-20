@@ -1,24 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-# CGI Climate Map Challenge
-
-This repository is a coding challenge for those who want to show their skills in coding and handling geospatial data.
-
-If you accept the challenge, you should fork this repo and make a pull request when you think you are ready for review.
-
-##  1. Find a bug
-
-Install dependencies and start the project:
-
-### `npm install`
-### `npm start`
-
-is there something wrong? fix it.
-
-## 2. Interactivity
-
-Use React-leaflet and fmi-api. Create something interactive.
-
-## 3. bonus
-- CI-pipeline
-- Data-analysis
+# Bug fixing
+- Inside Sidebar component created a **WrapperSidebar** to wrap a div before return. 
+# Project refactor
+- Moved **the observation location fetching** out of **App.js** and put it under **the services** folder. 
+- Created a components folder to store all component of project. 
+- Moved **SidebarComponent** from **src** to **components**.
+- Moved **MapContainer** out of **App.js** by creating a new **MapComponent** component 
+- Created 2 new components (**ThemeComponent**,**WeatherComponent**) to handle map theme and show realtime weather of selected location.
+- Moved **the LocationGetter** under **utils** folder.
+# Weather information and map visualizations
+- Add more functions to the map like dragging, zooming, scrolling, animate, baselayers...etc
+- Moved all markers to the middle of screen.
+- Change map's theme from dark to lighter.
+- Styled the sidebar.
+- Show location's name when hovering marker.
+# Editor 
+- **Dinh Duc Thinh**
+# Title
+- **Software Developer**
+# Date
+- **20.03.2019**
+# Screenshot
+![alt text](https://i120.photobucket.com/albums/o172/juneboy1984/Screen%20Shot%202019-03-20%20at%203.25.33%20AM_zpsdapq5u0n.png)
