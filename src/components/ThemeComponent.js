@@ -56,7 +56,7 @@ const StyledSpan = styled.span`
     display: none;
   }
 `
-const THEME_OPTIONS = ['Dark All', 'Alidade Smooth', 'Alidade Smooth_Dark', 'Outdoors']
+const THEME_OPTIONS = ['Dark All', 'Light All', 'Base Antique', 'Base Eco']
 
 export default function ThemeComponent ({setTheme}) {
     const handleThemeSelection = e => {

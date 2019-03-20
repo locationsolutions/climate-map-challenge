@@ -22,11 +22,11 @@ const StyledTable = styled.table`
     border: 0.5px solid #FFF;
     color: #FFF;
     padding: 5px;
-    font-size: 12px;  
+    font-size: 12px;
 `
 
 const DEFAULT_WELCOME_TEXT = 'Please select a location by double clicking to the marker!'
-function WeatherComponent ({loc}) {
+function WeatherComponent ({loc, observationLocationSize}) {
     console.info(JSON.stringify(loc, null, 4))
     return (
         <StyledWeather>
@@ -67,7 +67,13 @@ function WeatherComponent ({loc}) {
 
                     </StyledTable>
                 ) : (
-                    <h4>{DEFAULT_WELCOME_TEXT}</h4>
+                    <div>
+                       <p>
+                       {
+                         (observationLocationSize > 0)? (`${observationLocationSize} locations are available for checking weather. ${DEFAULT_WELCOME_TEXT}`) : ('Data is fetching...')
+                       }
+                       </p>
+                    </div>
                 )
             }
         </StyledWeather>

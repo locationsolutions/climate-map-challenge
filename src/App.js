@@ -16,10 +16,9 @@ L.Icon.Default.mergeOptions({
 });
 
 const THEME_OPTIONS = ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    'https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png'
-]
+'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+'https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png',
+'https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png']
 function App() {
   const [observationLocations, setObservationLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);

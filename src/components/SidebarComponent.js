@@ -19,7 +19,7 @@ function SidebarComponent({selectedLocationId, observationLocations, setTheme}) 
       <WrapperSidebar>
         {/*<pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>*/}
         <ThemeComponent setTheme={setTheme}/>
-        <WeatherComponent loc={loc}/>
+        <WeatherComponent loc={loc} observationLocationSize={observationLocations.length}/>
       </WrapperSidebar>
     )
 }
