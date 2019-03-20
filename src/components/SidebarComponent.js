@@ -10,7 +10,7 @@ const WrapperSidebar = styled.div`
     height: 100vh;
 `;
 
-function SidebarComponent({selectedLocationId, observationLocations}) {
+function SidebarComponent({selectedLocationId, observationLocations, setTheme}) {
     console.log("selectedLocationId: ", selectedLocationId)
     const id = getSelectedLocationId(selectedLocationId);
 
@@ -18,7 +18,7 @@ function SidebarComponent({selectedLocationId, observationLocations}) {
     return (
       <WrapperSidebar>
         {/*<pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>*/}
-        <ThemeComponent />
+        <ThemeComponent setTheme={setTheme}/>
         <WeatherComponent loc={loc}/>
       </WrapperSidebar>
     )

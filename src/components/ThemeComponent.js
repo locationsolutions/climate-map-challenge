@@ -58,17 +58,21 @@ const StyledSpan = styled.span`
 `
 const THEME_OPTIONS = ['Dark', 'Bright']
 
-export default function ThemeComponent (setTheme) {
+export default function ThemeComponent ({setTheme}) {
+    const handleThemeSelection = e => {
+        console.log('e.target.value: ',e.target.value)
+        setTheme(e.target.value)
+    }
     return (
         <StyledDiv>
             {
-                THEME_OPTIONS.map( theme => (
+                THEME_OPTIONS.map( (theme, index) => (
                     <StyledLabel key={theme}>{theme}
                         <StyledInput
                             type="radio"
                             name="radio"
-                            value={theme}
-                            onClick={ event => setTheme(event.target.value)}
+                            value={index}
+                            onClick={handleThemeSelection}
                             >
                         </StyledInput>
                             <StyledSpan className="checkmark">

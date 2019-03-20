@@ -15,15 +15,20 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+const THEME_OPTIONS = ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+]
 function App() {
   const [observationLocations, setObservationLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [defaultTheme, setTheme] = useState(1);
 
   useEffect(() => FetchObservationLocations(setObservationLocations), []);
 
   const map = (<MapComponent
                  observationLocations={observationLocations}
                  setSelectedLocation={setSelectedLocation}
+                 theme={THEME_OPTIONS[defaultTheme]}
                />);
 
   return (
@@ -31,6 +36,7 @@ function App() {
       <SidebarComponent
           selectedLocationId={selectedLocation}
           observationLocations={observationLocations}
+          setTheme={setTheme}
       />
         {map}
     </div>

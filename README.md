@@ -1,7 +1,7 @@
 # Bug fixing
 - Inside Sidebar component created a **WrapperSidebar** to wrap a div before return. 
 # Project refactor
-- Moved **the observation location fetching** out of **App.js** and put it under **the services** folder. 
+- Moved **the observation location fetching** out of **App.js** and put it under **the services** folder. So every service that we call from the Rest APIs we will to put to this folder. 
 - Created a components folder to store all component of project. 
 - Moved **SidebarComponent** from **src** to **components**.
 - Moved **MapContainer** out of **App.js** by creating a new **MapComponent** component 

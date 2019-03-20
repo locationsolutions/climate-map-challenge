@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
     LayersControl,
     Map,
@@ -6,7 +6,6 @@ import {
     TileLayer,
 } from 'react-leaflet'
 import styled from 'styled-components'
-import handleThemeSelection from './ThemeComponent'
 
 const MapContainer = styled(Map)`
     width: calc(100vw - 300px);
@@ -18,15 +17,10 @@ const MapContainer = styled(Map)`
 
 const position = [26, 62]
 const { BaseLayer } = LayersControl
-const THEME_OPTIONS = ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-                       'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-]
-export default function MapComponent({observationLocations, setSelectedLocation}) {
+
+export default function MapComponent({observationLocations, setSelectedLocation, theme}) {
     //console.log(JSON.stringify(observationLocations[1],null,4))
 
-    const [defaultTheme, setTheme] = useState(THEME_OPTIONS[1])
-
-    useEffect(() => handleThemeSelection(setTheme), []);
     return (
         <MapContainer
             center={position}
@@ -43,7 +37,7 @@ export default function MapComponent({observationLocations, setSelectedLocation}
             <LayersControl position="topright">
                 <BaseLayer checked name="OpenStreetMap.Mapnik">
                     <TileLayer
-                        url= {defaultTheme}
+                        url= {theme}
                         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
                         subdomains='abcd'
                         maxZoom={19}
