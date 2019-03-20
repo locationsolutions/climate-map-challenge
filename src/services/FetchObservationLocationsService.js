@@ -1,6 +1,6 @@
 import Metolib from '@fmidev/metolib';
 
-const SERVER_URL = 'http://opendata.fmi.fi/wfs'
+const SERVER_URL = 'https://opendata.fmi.fi/wfs'
 const STORED_QUERY_OBSERVATION = 'fmi::observations::weather::cities::multipointcoverage'
 
 const PARAMS_OBJ = {

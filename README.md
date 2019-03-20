@@ -22,4 +22,4 @@
 # Screenshot
 ![alt text](https://i120.photobucket.com/albums/o172/juneboy1984/Screen%20Shot%202019-03-20%20at%203.25.33%20AM_zpsdapq5u0n.png)
 # Demo
-- [a link](https://climate-map-challenge.herokuapp.com)
+- [climate-map-challenge](https://climate-map-challenge.herokuapp.com)
