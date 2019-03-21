@@ -15,7 +15,7 @@ const MapContainer = styled(Map)`
     left:300px;
 `
 
-const position = [26, 62]
+const position = [63, 24]
 const { BaseLayer } = LayersControl
 
 export default function MapComponent({observationLocations, setSelectedLocation, theme}) {
@@ -24,7 +24,7 @@ export default function MapComponent({observationLocations, setSelectedLocation,
     return (
         <MapContainer
             center={position}
-            zoom={6}
+            zoom={5.3}
             maxZoom={10}
             attributionControl={true}
             zoomControl={true}
@@ -55,4 +55,3 @@ export default function MapComponent({observationLocations, setSelectedLocation,
         </MapContainer>
     )
 }
-
