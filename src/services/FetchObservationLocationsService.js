@@ -34,7 +34,7 @@ export default function FetchObservationLocationsService (setObservationLocation
                 setObservationLocations(data.locations
                     .map(loc => {
                         const [lon, lat] = loc.info.position.map(parseFloat);
-                        return {...loc, position: {lat, lon}}
+                        return {...loc, position: {lon, lat}}
                     })
                 );
 
