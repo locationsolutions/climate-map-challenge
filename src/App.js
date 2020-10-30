@@ -6,6 +6,8 @@ import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from './Sidebar';
 import getSelectedLocatoinId from './locationGetter';
+import Chart from "chart.js";
+
 
 const MapContainer = styled(Map)`
     width: calc(100vw - 300px);
@@ -32,7 +34,15 @@ function App() {
 
   const clickedLocation = observationLocations.find(loc=> loc.info.id === selectedLocation);
 
-  console.log('clickedLocation',JSON.stringify(clickedLocation))
+  var clickedData = null;
+  if (selectedLocation != null) {
+    clickedData = clickedLocation.data.t.timeValuePairs
+    console.log(JSON.stringify(clickedData));
+    // create line chart
+
+  }
+
+
 
   useEffect(function fetchObservationLocations() {
     const connection = new Metolib.WfsConnection();
@@ -86,30 +96,21 @@ function App() {
       {selectedLocation && (
         <Popup
           position = {[clickedLocation.position.lon, clickedLocation.position.lat]}
-          //position={[selectedLocation.position.lon, selectedLocation.position.lat]}
-          //position={[observationLocations.find(loc=> loc.info.id === selectedLocation).position.lon,
-          //          observationLocations.find(loc=> loc.info.id === selectedLocation).position.lat]}
           onClose= {()=> {
             setSelectedLocation(null);
           }}
         >
-
           <div>
-            <h2>{
-                clickedLocation.info.name
-                //observationLocations.find(loc=> loc.info.id === selectedLocation).info.name
+            <h2>{ clickedLocation.info.name }</h2>
+            <p>{
+                // insert line chart
+                "Position: " + JSON.stringify(clickedLocation.info.position, null, 4)
+
               }
-            </h2>
-              <p>
-                {
-                  //"This is description"
-                  JSON.stringify(clickedLocation.info, null, 4)
-                }
-              </p>
+            </p>
           </div>
         </Popup>
       )}
-
     </MapContainer>
   );
 
@@ -117,10 +118,8 @@ function App() {
     <div className="App">
       <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
       {map}
-
     </div>
   );
-
 }
 
 export default App;
