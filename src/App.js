@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Metolib from '@fmidev/metolib';
 import './App.css';
-import {Map, Marker, TileLayer} from "react-leaflet";
+import {Map, Marker, TileLayer, Popup} from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from './Sidebar';
+import getSelectedLocatoinId from './locationGetter';
 
 const MapContainer = styled(Map)`
     width: calc(100vw - 300px);
@@ -28,6 +29,10 @@ function App() {
   const [observationLocations, setObservationLocations] = useState([]);
 
   const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const clickedLocation = observationLocations.find(loc=> loc.info.id === selectedLocation);
+
+  console.log('clickedLocation',JSON.stringify(clickedLocation))
 
   useEffect(function fetchObservationLocations() {
     const connection = new Metolib.WfsConnection();
@@ -69,9 +74,42 @@ function App() {
         subdomains='abcd'
         maxZoom={19}
       />
-      {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-                                               key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
-      </Marker>)}
+
+      {observationLocations.map(loc => (
+        <Marker position={[loc.position.lon, loc.position.lat]}
+                onClick={() => setSelectedLocation(loc.info.id)}
+                key={loc.info.id}>
+        </Marker>
+      ))}
+
+
+      {selectedLocation && (
+        <Popup
+          position = {[clickedLocation.position.lon, clickedLocation.position.lat]}
+          //position={[selectedLocation.position.lon, selectedLocation.position.lat]}
+          //position={[observationLocations.find(loc=> loc.info.id === selectedLocation).position.lon,
+          //          observationLocations.find(loc=> loc.info.id === selectedLocation).position.lat]}
+          onClose= {()=> {
+            setSelectedLocation(null);
+          }}
+        >
+
+          <div>
+            <h2>{
+                clickedLocation.info.name
+                //observationLocations.find(loc=> loc.info.id === selectedLocation).info.name
+              }
+            </h2>
+              <p>
+                {
+                  //"This is description"
+                  JSON.stringify(clickedLocation.info, null, 4)
+                }
+              </p>
+          </div>
+        </Popup>
+      )}
+
     </MapContainer>
   );
 
@@ -79,6 +117,7 @@ function App() {
     <div className="App">
       <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
       {map}
+
     </div>
   );
 
