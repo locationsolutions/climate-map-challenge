@@ -1,22 +1,20 @@
-import React from 'react';
-import styled from "styled-components";
-
-const popupContent = {
-  height: "400px",
-  width: "500px",
-  marginTop: "20px"
-};
+// styles for popups on marginTop
 
 const popupHead = {
-  fontWeight: "bold",
-  fontSize: "16px"
+  fontsize: "20px",
+  fontWeight: "bold"
 
-};
+}
 
 const popupText = {
   fontSize: "15px",
   marginBottom: "20px"
 };
+
+const popupContent = {
+  fontsize: "14px",
+  marginTop: "30px"
+}
 
 const okText = {
   fontSize: "15px",

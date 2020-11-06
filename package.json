@@ -10,8 +10,11 @@
     "react": "^16.7.0-alpha",
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.7.0-alpha",
+    "react-input-range": "^1.3.0",
     "react-leaflet": "^2.1.2",
+    "react-leaflet-heatmap-layer": "^2.0.0",
     "react-scripts": "2.0.5",
+    "react-slider": "^1.1.1",
     "styled-components": "^4.1.1"
   },
   "scripts": {
