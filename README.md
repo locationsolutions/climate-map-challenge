@@ -2,6 +2,8 @@
 
 This repository was edited by Timo Ijäs @himotimo.
 
+Instructions on how to run the application are below.
+
 My application visualizes weather data from the Finnish Meteorological Institute API. The data is from the past seven days and is loaded on launch. The point of this application is visual and statistical analysis of climate data.
 
 The application creates clickable markers, which open a popup. The popup shows the weather station name, a bar graph of precipitation, and line graph of climate temperature. Hover your mouse on the elements to see specific data values.
@@ -13,6 +15,7 @@ I intended to use inverse distance weighted interpolation to represent temperatu
 As for the goals of this challenge, I have cleared parts 1, 2, and Data-Analysis part of 3. CI-pipeline is not implemented.
 
 This was my first touch to react, HTML and Leaflet. I found the challenge inspiring and fun, and I will definitely keep practicing.
+
 
 
 Original readme: 
