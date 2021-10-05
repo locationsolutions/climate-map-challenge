@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Metolib from '@fmidev/metolib';
 import './App.css';
-import {Map, Marker, TileLayer} from "react-leaflet";
+import {Map, Marker, TileLayer, Popup} from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from './Sidebar';
@@ -29,6 +29,8 @@ function App() {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
 
+  const [forecastLocation, setForecastLocation] = useState(null)
+
   useEffect(function fetchObservationLocations() {
     const connection = new Metolib.WfsConnection();
     if (connection.connect('http://opendata.fmi.fi/wfs', 'fmi::observations::weather::cities::multipointcoverage')) {
@@ -46,10 +48,11 @@ function App() {
             });
             return;
           }
+          console.log(data)
 
           setObservationLocations(data.locations
             .map(loc => {
-              const [lon, lat] = loc.info.position.map(parseFloat);
+              const [lat, lon] = loc.info.position.map(parseFloat);
               return {...loc, position: {lat, lon}}
             })
           );
@@ -59,6 +62,42 @@ function App() {
       });
     }
   }, []);
+
+  const queryWeatherForecast = (location, starttime, endtime) => {
+    const queryString = 'fmi::forecast::hirlam::surface::point::multipointcoverage'
+    var parser = new Metolib.WfsRequestParser();
+    parser.getData({
+      url : 'http://opendata.fmi.fi/wfs',
+      storedQueryId : queryString,
+      requestParameter : "temperature,windspeedms",
+      begin : Date.now() + starttime,
+      fmsid: `${location.info.fmsid}`,
+      geoid: `${location.info.geoid}`,
+      wmo: `${location.info.wmo}`,
+      end : Date.now() + starttime + endtime,
+      timestep : 60 * 60 * 1000,
+      place: [`${location.info.name}`],
+      callback : function(data, errors) {
+        if (errors.length > 0) {
+
+          errors.forEach(err => {
+            console.error('FMI API error: ' + err.errorText);
+          });
+          return;
+        }
+
+        console.log(data.locations[0])
+
+        setForecastLocation(data.locations[0]);
+
+      }
+  });
+  }
+
+  const sayHello = () => {
+    console.log('hello')
+  }
+
 
   const position = [65, 26];
   const map = (
@@ -70,14 +109,21 @@ function App() {
         maxZoom={19}
       />
       {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
-                                               key={loc.info.id} onClick={() => setSelectedLocation(loc.info.id)}>
+                                               key={loc.info.id} onClick={() => {
+                                               setSelectedLocation(loc.info.id)
+                                               queryWeatherForecast(loc, 0, 18000000)}}>
+                                                 <Popup><button onClick={() => sayHello()}>Hello button</button></Popup>
       </Marker>)}
     </MapContainer>
   );
 
   return (
     <div className="App">
-      <Sidebar selectedLocationId={selectedLocation} observationLocations={observationLocations}/>
+        <Sidebar 
+          selectedLocationId={selectedLocation} 
+          observationLocations={observationLocations}
+          forecastLocation={forecastLocation}
+        />
       {map}
     </div>
   );
