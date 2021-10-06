@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
-import getSelectedLocatoinId from './locationGetter';
+// eslint-disable-next-line no-unused-vars
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import getSelectedLocatoinId from './locationGetter'
 
 function Sidebar({selectedLocationId, observationLocations, forecastLocation, queryWeatherForecast}) {
-    const id = getSelectedLocatoinId(selectedLocationId);
+    const id = getSelectedLocatoinId(selectedLocationId)
     const [infoToFetch, setInfoToFetch] = useState(null)
     const [foreCastNextHour, setForeCastNextHour] = useState(1)
 
     const loc = observationLocations.find(loc => loc.info.id === id)
     
+    // eslint-disable-next-line no-unused-vars
     const WeatherForecast = () => {
         var timePairArr = []
         var weatherData = null
         switch (infoToFetch) {
-            case 'temperature':
-                weatherData = forecastLocation !== null ? forecastLocation.data.temperature.timeValuePairs : null
-                timePairArr = forecastLocation !== null ? weatherData : []
-                break
-            case 'windspeedms':
-                weatherData = forecastLocation !== null ? forecastLocation.data.windspeedms.timeValuePairs : null
-                timePairArr = forecastLocation !== null ? weatherData : []
-                break
-            default:
-                return
+        case 'temperature':
+            weatherData = forecastLocation !== null ? forecastLocation.data.temperature.timeValuePairs : null
+            timePairArr = forecastLocation !== null ? weatherData : []
+            break
+        case 'windspeedms':
+            weatherData = forecastLocation !== null ? forecastLocation.data.windspeedms.timeValuePairs : null
+            timePairArr = forecastLocation !== null ? weatherData : []
+            break
+        default:
+            return
         }
-        timePairArr.map(timepair => timepair.time = new Date(timepair.time).toLocaleDateString('fi-FI').concat(": ").concat(new Date(timepair.time).toLocaleTimeString('fi-FI')))
+        timePairArr.map(timepair => timepair.time = new Date(timepair.time).toLocaleDateString('fi-FI').concat(': ').concat(new Date(timepair.time).toLocaleTimeString('fi-FI')))
         return (
             <div>
                 <h4>Weather forecast for place 
@@ -44,13 +46,13 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation, qu
         {forecastLocation &&<button onClick={() => setInfoToFetch('windspeedms')}>See forecast for wind speed</button>}
         <br />
         {infoToFetch !== null && <button onClick={() => {
-                    setForeCastNextHour(foreCastNextHour + 1)
-                    queryWeatherForecast(forecastLocation, foreCastNextHour - 1, foreCastNextHour)}
-                }>Forecast for next hour</button>}
+            setForeCastNextHour(foreCastNextHour + 1)
+            queryWeatherForecast(forecastLocation, foreCastNextHour - 1, foreCastNextHour)}
+        }>Forecast for next hour</button>}
         {infoToFetch !== null && <button onClick={() => {
-                    setForeCastNextHour(foreCastNextHour  - 1)
-                    queryWeatherForecast(forecastLocation, foreCastNextHour - 2, foreCastNextHour)}
-                }>Go back 1 hour</button>}      
+            setForeCastNextHour(foreCastNextHour  - 1)
+            queryWeatherForecast(forecastLocation, foreCastNextHour - 2, foreCastNextHour)}
+        }>Go back 1 hour</button>}      
         {infoToFetch !== null && <WeatherForecast />} 
     </div>
 }
@@ -58,4 +60,4 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation, qu
 export default styled(Sidebar)`
     width: 300px;
     height: 100vh;
-`;
+`
