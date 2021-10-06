@@ -6,7 +6,7 @@ import { Paper, Button, TableContainer, Table, TableBody, TableCell, TableRow } 
 // eslint-disable-next-line no-unused-vars
 //import { makeStyles } from '@material-ui/core/styles'
 
-function Sidebar({observationLocations, forecastLocation, queryWeatherForecast}) {
+function Sidebar({forecastLocation, queryWeatherForecast}) {
     const [infoToFetch, setInfoToFetch] = useState(null)
     const [foreCastNextHour, setForeCastNextHour] = useState(1)
 

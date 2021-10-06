@@ -125,7 +125,6 @@ function App() {
     return (
         <div className="App">
             <Sidebar 
-                observationLocations={observationLocations}
                 forecastLocation={forecastLocation}
                 queryWeatherForecast={queryWeatherForecast}
             />
