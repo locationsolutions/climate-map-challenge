@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import getSelectedLocatoinId from './locationGetter';
 
-function Sidebar({selectedLocationId, observationLocations, forecastLocation}) {
+function Sidebar({selectedLocationId, observationLocations, forecastLocation, queryWeatherForecast}) {
     const id = getSelectedLocatoinId(selectedLocationId);
     const [infoToFetch, setInfoToFetch] = useState(null)
+    const [foreCast12Next12Hours, setForecastNext12Hours] = useState(1)
 
     const loc = observationLocations.find(loc => loc.info.id === id)
     
@@ -21,14 +22,17 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation}) {
                 timePairArr = forecastLocation !== null ? weatherData : []
                 break
             default:
+                return
         }
         timePairArr.map(timepair => timepair.time = new Date(timepair.time).toLocaleDateString('fi-FI').concat(": ").concat(new Date(timepair.time).toLocaleTimeString('fi-FI')))
         return (
             <div>
-                <h4>Weather forecast for place {forecastLocation.info.name}</h4>
+                <h4>Weather forecast for place 
+                    <br />{forecastLocation.info.name}</h4>
                 <h3>{infoToFetch}</h3>
                 {timePairArr.map(observation =>
-                    <div>Time : {observation.time} <br /> Temperature : {observation.value}</div>)}}
+                    <div>Time : {observation.time} <br /> Value : {observation.value}</div>)}
+                <br />
             </div>
         )
     }
@@ -37,8 +41,17 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation}) {
         <pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>
         {forecastLocation && <button onClick={() => setInfoToFetch('temperature')}>See forecast for air temperature</button>}
         <br />
-        {forecastLocation &&<button onClick={() => setInfoToFetch('windspeed')}>See forecast for wind speed</button>}
-        {infoToFetch !== null && <WeatherForecast />}
+        {forecastLocation &&<button onClick={() => setInfoToFetch('windspeedms')}>See forecast for wind speed</button>}
+        <br />
+        {infoToFetch !== null && <button onClick={() => {
+                    setForecastNext12Hours(foreCast12Next12Hours + 1)
+                    queryWeatherForecast(forecastLocation, foreCast12Next12Hours - 1, foreCast12Next12Hours)}
+                }>Forecast for next 12 hours</button>}
+        {infoToFetch !== null && <button onClick={() => {
+                    setForecastNext12Hours(foreCast12Next12Hours  - 1)
+                    queryWeatherForecast(forecastLocation, foreCast12Next12Hours - 2, foreCast12Next12Hours)}
+                }>Go back 12 hours</button>}      
+        {infoToFetch !== null && <WeatherForecast />} 
     </div>
 }
 

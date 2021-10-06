@@ -63,18 +63,20 @@ function App() {
     }
   }, []);
 
-  const queryWeatherForecast = (location, starttime, endtime) => {
+  const queryWeatherForecast = (location, starttimeblock, endtimeblock) => {
+    const starttime = (Date.now() + (43200000 * starttimeblock))
+    const endtime = (Date.now() + (43200000 * endtimeblock))
     const queryString = 'fmi::forecast::hirlam::surface::point::multipointcoverage'
     var parser = new Metolib.WfsRequestParser();
     parser.getData({
       url : 'http://opendata.fmi.fi/wfs',
       storedQueryId : queryString,
       requestParameter : "temperature,windspeedms",
-      begin : Date.now() + starttime,
+      begin : starttime,
       fmsid: `${location.info.fmsid}`,
       geoid: `${location.info.geoid}`,
       wmo: `${location.info.wmo}`,
-      end : Date.now() + starttime + endtime,
+      end : endtime,
       timestep : 60 * 60 * 1000,
       place: [`${location.info.name}`],
       callback : function(data, errors) {
@@ -94,10 +96,6 @@ function App() {
   });
   }
 
-  const sayHello = () => {
-    console.log('hello')
-  }
-
 
   const position = [65, 26];
   const map = (
@@ -111,8 +109,15 @@ function App() {
       {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
                                                key={loc.info.id} onClick={() => {
                                                setSelectedLocation(loc.info.id)
-                                               queryWeatherForecast(loc, 0, 18000000)}}>
-                                                 <Popup><button onClick={() => sayHello()}>Hello button</button></Popup>
+                                               queryWeatherForecast(loc, 0, 1)}}>
+                                                 <Popup>{loc.info.name}
+                                                  <br />
+                                                  Air temperature now: {loc.data.t.timeValuePairs[144].value}
+                                                  <br />
+                                                  Precipitation: {loc.data.r_1h.timeValuePairs[144].value}
+                                                  <br />
+                                                  Snow depth: {loc.data.snowdepth.timeValuePairs[144].value}
+                                                 </Popup>
       </Marker>)}
     </MapContainer>
   );
@@ -123,6 +128,7 @@ function App() {
           selectedLocationId={selectedLocation} 
           observationLocations={observationLocations}
           forecastLocation={forecastLocation}
+          queryWeatherForecast={queryWeatherForecast}
         />
       {map}
     </div>
