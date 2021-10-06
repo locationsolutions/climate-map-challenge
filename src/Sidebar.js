@@ -1,16 +1,27 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import getSelectedLocatoinId from './locationGetter'
+// eslint-disable-next-line no-unused-vars
+import { Paper, Button, TableContainer, Table, TableBody, TableCell, TableRow } from '@material-ui/core'
+// eslint-disable-next-line no-unused-vars
+//import { makeStyles } from '@material-ui/core/styles'
 
-function Sidebar({selectedLocationId, observationLocations, forecastLocation, queryWeatherForecast}) {
-    const id = getSelectedLocatoinId(selectedLocationId)
+function Sidebar({observationLocations, forecastLocation, queryWeatherForecast}) {
     const [infoToFetch, setInfoToFetch] = useState(null)
     const [foreCastNextHour, setForeCastNextHour] = useState(1)
 
-    // eslint-disable-next-line no-console
-    console.log('hello')
-    const loc = observationLocations.find(loc => loc.info.id === id)
+    /*
+    const useStyles = makeStyles({
+        table: {
+            display: 'flex',
+            padding: '10px',
+            borderWidth: '1px',
+            position: 'absolute',
+        }
+    })
+    */
+
+    //const classes = useStyles()
     
     // eslint-disable-next-line no-unused-vars
     const WeatherForecast = () => {
@@ -31,30 +42,42 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation, qu
         timePairArr.map(timepair => timepair.time = new Date(timepair.time).toLocaleDateString('fi-FI').concat(': ').concat(new Date(timepair.time).toLocaleTimeString('fi-FI')))
         return (
             <div>
-                <h4>Weather forecast for place 
-                    <br />{forecastLocation.info.name}</h4>
+                <h4>Weather forecast for place <br /> {forecastLocation.info.name}</h4>
                 <h3>{infoToFetch}</h3>
-                {timePairArr.map(observation =>
-                    <div>Time : {observation.time} <br /> Value : {observation.value}</div>)}
-                <br />
-            </div>
+                <TableContainer component={Paper} aria-label='spanning table'>
+                    <Table sx={{ minWidth: 50 }}>
+                        <TableBody>
+                            {timePairArr.map((observation) =>
+                                <TableRow
+                                    key={observation.time}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell>
+                                        Time: {observation.time} Value : {observation.value}
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>      
+
         )
     }
 
     return <div>
-        <pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>
-        {forecastLocation && <button onClick={() => setInfoToFetch('temperature')}>See forecast for air temperature</button>}
+        {forecastLocation && <Button variant='outlined' onClick={() => setInfoToFetch('temperature')}>Temperature forecast</Button>}
         <br />
-        {forecastLocation &&<button onClick={() => setInfoToFetch('windspeedms')}>See forecast for wind speed</button>}
+        {forecastLocation &&<Button variant='outlined' onClick={() => setInfoToFetch('windspeedms')}>Wind speed forecast</Button>}
         <br />
-        {infoToFetch !== null && <button onClick={() => {
+        {infoToFetch !== null && <Button variant='outlined' onClick={() => {
             setForeCastNextHour(foreCastNextHour + 1)
             queryWeatherForecast(forecastLocation, foreCastNextHour - 1, foreCastNextHour)}
-        }>Forecast for next hour</button>}
-        {infoToFetch !== null && <button onClick={() => {
+        }>Next hour</Button>}
+        {infoToFetch !== null && <Button variant='outlined' onClick={() => {
             setForeCastNextHour(foreCastNextHour  - 1)
             queryWeatherForecast(forecastLocation, foreCastNextHour - 2, foreCastNextHour)}
-        }>Go back 1 hour</button>}      
+        }>Go back 1 hour</Button>}      
         {infoToFetch !== null && <WeatherForecast />} 
     </div>
 }

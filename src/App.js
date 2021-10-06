@@ -31,8 +31,6 @@ L.Icon.Default.mergeOptions({
 function App() {
     const [observationLocations, setObservationLocations] = useState([])
 
-    const [selectedLocation, setSelectedLocation] = useState(null)
-
     const [forecastLocation, setForecastLocation] = useState(null)
 
     useEffect(function fetchObservationLocations() {
@@ -111,7 +109,6 @@ function App() {
             />
             {observationLocations.map(loc => <Marker position={[loc.position.lat, loc.position.lon]}
                 key={loc.info.id} onClick={() => {
-                    setSelectedLocation(loc.info.id)
                     queryWeatherForecast(loc, 0, 1)}}>
                 <Popup>{loc.info.name}
                     <br />
@@ -128,7 +125,6 @@ function App() {
     return (
         <div className="App">
             <Sidebar 
-                selectedLocationId={selectedLocation} 
                 observationLocations={observationLocations}
                 forecastLocation={forecastLocation}
                 queryWeatherForecast={queryWeatherForecast}
