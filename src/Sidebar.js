@@ -8,6 +8,8 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation, qu
     const [infoToFetch, setInfoToFetch] = useState(null)
     const [foreCastNextHour, setForeCastNextHour] = useState(1)
 
+    // eslint-disable-next-line no-console
+    console.log('hello')
     const loc = observationLocations.find(loc => loc.info.id === id)
     
     // eslint-disable-next-line no-unused-vars
