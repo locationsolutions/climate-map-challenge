@@ -5,7 +5,7 @@ import getSelectedLocatoinId from './locationGetter';
 function Sidebar({selectedLocationId, observationLocations, forecastLocation, queryWeatherForecast}) {
     const id = getSelectedLocatoinId(selectedLocationId);
     const [infoToFetch, setInfoToFetch] = useState(null)
-    const [foreCast12Next12Hours, setForecastNext12Hours] = useState(1)
+    const [foreCastNextHour, setForeCastNextHour] = useState(1)
 
     const loc = observationLocations.find(loc => loc.info.id === id)
     
@@ -44,13 +44,13 @@ function Sidebar({selectedLocationId, observationLocations, forecastLocation, qu
         {forecastLocation &&<button onClick={() => setInfoToFetch('windspeedms')}>See forecast for wind speed</button>}
         <br />
         {infoToFetch !== null && <button onClick={() => {
-                    setForecastNext12Hours(foreCast12Next12Hours + 1)
-                    queryWeatherForecast(forecastLocation, foreCast12Next12Hours - 1, foreCast12Next12Hours)}
-                }>Forecast for next 12 hours</button>}
+                    setForeCastNextHour(foreCastNextHour + 1)
+                    queryWeatherForecast(forecastLocation, foreCastNextHour - 1, foreCastNextHour)}
+                }>Forecast for next hour</button>}
         {infoToFetch !== null && <button onClick={() => {
-                    setForecastNext12Hours(foreCast12Next12Hours  - 1)
-                    queryWeatherForecast(forecastLocation, foreCast12Next12Hours - 2, foreCast12Next12Hours)}
-                }>Go back 12 hours</button>}      
+                    setForeCastNextHour(foreCastNextHour  - 1)
+                    queryWeatherForecast(forecastLocation, foreCastNextHour - 2, foreCastNextHour)}
+                }>Go back 1 hour</button>}      
         {infoToFetch !== null && <WeatherForecast />} 
     </div>
 }

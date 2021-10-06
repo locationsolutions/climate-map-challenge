@@ -48,7 +48,6 @@ function App() {
             });
             return;
           }
-          console.log(data)
 
           setObservationLocations(data.locations
             .map(loc => {
@@ -64,8 +63,8 @@ function App() {
   }, []);
 
   const queryWeatherForecast = (location, starttimeblock, endtimeblock) => {
-    const starttime = (Date.now() + (43200000 * starttimeblock))
-    const endtime = (Date.now() + (43200000 * endtimeblock))
+    const starttime = (Date.now() + (3600000 * starttimeblock))
+    const endtime = (Date.now() + (3600000 * endtimeblock))
     const queryString = 'fmi::forecast::hirlam::surface::point::multipointcoverage'
     var parser = new Metolib.WfsRequestParser();
     parser.getData({
@@ -87,8 +86,6 @@ function App() {
           });
           return;
         }
-
-        console.log(data.locations[0])
 
         setForecastLocation(data.locations[0]);
 
