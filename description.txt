@@ -1,0 +1,30 @@
+The goal of this application is to show temprerature information of the weather stations from the last 24 hours.
+On the map are presented all the weather stations. The color of the station depends if the temperature is below or over 0 Celsius degrees.
+At first the sidebar displays the maximum and minimum tempretature from all the weather stations.
+Once a weather station is chosen, relevant weather information from that station is displayed. 
+
+Changes 
+	App.js
+		The problem in the beginning was that the coordinates lon, lat where in wrong order in the function setObservationLocations.
+		New html-marker style added, used instead of the leaflet-icon. 
+			Adjusted the color of the marker to depend on the data.
+		Edits in the API request: 
+			Observations from the last 24 hours, newest from 90 minutes ago, because there is delay on the measurements on some stations. 
+			Request only for temperature, because no other weather information is used.
+		Mapcontainer:
+			Added LayerControl and new basemap
+			Conditional icon for weather station marker to display temperature on map
+			Added popup for the weather station markers to display station name and temperature
+		Refactored the code to be more consistent (indentations, quotations etc).
+
+	Sidebar.js
+		Implemented styling for the sidebar
+			Map legend also displayed on the sidebar
+		Looped through the weather station data to find max and min temperatures from the last 24 hours for active station
+		Calculated the average tempretature from the last 24 hours
+		Displayed calculated weather information and its time
+		If no weather station is chosen, the temprerature extremes are displayed
+
+	Extremes.js
+		Calculated the max and min temperatures from the last 24 hours by looping through all the stations and their temperatures
+		Displayed the temperature, time and place
