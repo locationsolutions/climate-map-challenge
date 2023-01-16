@@ -49,7 +49,7 @@ function App() {
 
           setObservationLocations(data.locations
             .map(loc => {
-              const [lon, lat] = loc.info.position.map(parseFloat);
+              const [lat, lon] = loc.info.position.map(parseFloat);
               return {...loc, position: {lat, lon}}
             })
           );
