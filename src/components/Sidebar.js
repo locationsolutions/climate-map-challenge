@@ -9,11 +9,13 @@ function Sidebar({ selectedLocationId, observationLocations }) {
 
   const loc = observationLocations.find((loc) => loc.info.id === id);
   return (
-    <div>{loc === undefined ? <MainInfo /> : <LocationInfo loc={loc} />}</div>
+    <div className="sidebar">
+      {loc === undefined ? <MainInfo /> : <LocationInfo loc={loc} />}
+    </div>
   );
 }
 
 export default styled(Sidebar)`
-  width: 300px;
+  width: 500px;
   height: 100vh;
 `;

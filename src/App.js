@@ -7,11 +7,11 @@ import L from "leaflet";
 import Sidebar from "./components/Sidebar";
 
 const MapContainer = styled(Map)`
-  width: calc(100vw - 300px);
+  width: calc(100vw - 500px);
   height: 100vh;
   position: absolute;
   top: 0px;
-  left: 300px;
+  left: 500px;
 `;
 
 // Ugly hack to fix Leaflet icons with leaflet loaders
