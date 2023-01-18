@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import getSelectedLocatoinId from "./locationGetter";
+import LocationInfo from "./LocationInfo";
+import MainInfo from "./Maininfo";
 
 function Sidebar({ selectedLocationId, observationLocations }) {
   const id = getSelectedLocatoinId(selectedLocationId);
 
   const loc = observationLocations.find((loc) => loc.info.id === id);
   return (
-    <div>
-      <pre>{loc && JSON.stringify(loc.info, null, 4)}</pre>
-    </div>
+    <div>{loc === undefined ? <MainInfo /> : <LocationInfo loc={loc} />}</div>
   );
 }
 
