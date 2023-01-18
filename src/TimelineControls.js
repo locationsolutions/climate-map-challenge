@@ -59,15 +59,23 @@ const TimelineControls = (props) => {
    */
   let infobox = "";
   if (parseInt(dataLength)) {
-    infobox = (
-      <div id="infobox">
+    infobox = <div id="infobox">
         <p className="infobox__title">Datapoints date and time</p>
-        <p className="infobox__subtitle">(toggle layers from menu on left)</p>
+        <p className="infobox__subtitle">
+          (toggle layers from menu on left)
+        </p>
         <p className="infobox__date">
           {timestampToDate(observationData[currentDataindex].time)}
         </p>
-      </div>
-    );
+
+        <div className="slider slider__container">
+          <p>Change time, 1hr increment</p>
+          <input type="range" className="slider__controller" min="0" max={dataLength - 1} step="1" value={currentDataindex} name="timeSlider" onChange={(event) => {
+              setCurrentDataIndex(parseInt(event.target.value));
+              props.getCurrentDataIndex(currentDataindex);
+            }} />
+        </div>
+      </div>;
   } else {
     infobox = (
       <div id="infobox">
