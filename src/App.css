@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+
+  overflow: hidden; /* TODO fix this... this is for the loader... */
 }
 
 .container {
@@ -20,4 +22,24 @@ body {
   display: block;
   white-space: pre;
   margin: 1em 0px;
+}
+
+.loader {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+}
+
+.loader span {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(5, 5, 5, 0.5);
+  color: red;
+
+  text-align: center;
 }

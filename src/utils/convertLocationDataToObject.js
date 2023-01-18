@@ -7,7 +7,7 @@ function doDayHighAndLow(loc, forDays = 6) {
   const maxDayChunks = dayChunks.filter((item, index) => {
     return index < forDays; // hack to limit amount of days
   });
-  console.log(dayChunks);
+
   const highsAndLows = maxDayChunks.map((day, index) => {
     const { high, low } = mapValueHighsAndLows(day);
     return { day: convertTimestampToDate(day[0].time, "fi-FI"), high, low };

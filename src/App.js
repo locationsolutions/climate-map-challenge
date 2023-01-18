@@ -23,8 +23,10 @@ L.Icon.Default.mergeOptions({
 });
 
 function App() {
-  const [observationLocations, setObservationLocations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("Loading...");
 
+  const [observationLocations, setObservationLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(function fetchObservationLocations() {
@@ -46,6 +48,7 @@ function App() {
             errors.forEach((err) => {
               console.error("FMI API error: " + err.errorText);
             });
+            setLoadingText("Error loading...");
             return;
           }
 
@@ -57,6 +60,7 @@ function App() {
           );
 
           connection.disconnect();
+          setLoading(false);
         },
       });
     }
@@ -84,7 +88,8 @@ function App() {
                 <span>{loc.info.position}</span>
                 <p />
                 <span>
-                  double click to open info or<br /> click here:{" "}
+                  double click to open info or
+                  <br /> click here:{" "}
                 </span>
                 <button onClick={() => setSelectedLocation(loc.info.id)}>
                   Show info
@@ -99,6 +104,13 @@ function App() {
 
   return (
     <div className="App">
+      {loading ? (
+        <div className="loader">
+          <span>
+            <p>{loadingText}</p>
+          </span>
+        </div>
+      ) : null}
       <Sidebar
         selectedLocationId={selectedLocation}
         observationLocations={observationLocations}

@@ -9,7 +9,6 @@ function mapValueHighsAndLows(array) {
     (min, item) => Math.min(min, item.value),
     array[0].value
   );
-  console.log(`The highest value is ${high} and the lowest value is ${low}`);
 
   return { high, low };
 }

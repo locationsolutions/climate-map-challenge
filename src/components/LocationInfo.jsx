@@ -6,7 +6,10 @@ function LocationInfo({ loc }) {
   const toggleDataInput = useRef(null);
   const [showElement, setShowElement] = useState(true);
 
-  console.log("DATA:\n", loc);
+  console.log(
+    `%c DEBUG DATA:\n ${JSON.stringify(loc)} `,
+    "background: #2C2C2C; color: #FF6100"
+  );
 
   const locationObject = convertLocationDataToObject(loc);
   return (
