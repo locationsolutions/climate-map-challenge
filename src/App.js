@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Metolib from "@fmidev/metolib";
 import "./App.css";
-import { Map, Marker, TileLayer } from "react-leaflet";
+import { Map, Marker, TileLayer, Popup } from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from "./components/Sidebar";
@@ -76,7 +76,23 @@ function App() {
           position={[loc.position.lat, loc.position.lon]}
           key={loc.info.id}
           onClick={() => setSelectedLocation(loc.info.id)}
-        />
+        >
+          <Popup autoPan={true}>
+            {
+              <span>
+                <h3>{loc.info.name}</h3>
+                <span>{loc.info.position}</span>
+                <p />
+                <span>
+                  double click to open info or<br /> click here:{" "}
+                </span>
+                <button onClick={() => setSelectedLocation(loc.info.id)}>
+                  Show info
+                </button>
+              </span>
+            }
+          </Popup>
+        </Marker>
       ))}
     </MapContainer>
   );
