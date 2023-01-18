@@ -32,3 +32,7 @@ p::last-child {
 .infobox__subtitle {
     font-size: 0.7rem;
 }
+
+.slider__controller {
+    width: 100%;
+}
