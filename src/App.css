@@ -1,0 +1,14 @@
+.leaflet-popup-content-wrapper {
+    background-color: rgba(255,255,255,0.8);
+}
+
+.leaflet-popup-content {
+    margin: 15px 5px;
+}
+
+.leaflet-popup-content p {
+    font-size: 12px;    
+    margin: 0;
+}
+
+.leaflet-div-icon { background-color: transparent; border-color: transparent }
