@@ -1,6 +1,13 @@
 import React from "react";
 import { Rectangle, Popup } from "react-leaflet";
 
+/**
+ * 
+ * @param {*} props | .loc  | Location info
+ * @param {*} props | .v    | Dataset index which we are currently on
+ * @param {*} props | .key  | Unique key for the component
+ * @returns react-leaflet Rectangle with popup
+ */
 const CustomRectangleMarker = (props) => {
   // Latitude and longitude setup
   const latitude = props.loc.position.lat;
@@ -16,6 +23,9 @@ const CustomRectangleMarker = (props) => {
   const rectangleHeight = [latitude + rainfallAmount, longitude + 0.3];
   const rectangle = [latlon, rectangleHeight];
 
+  /**
+   * Custom marker definitions
+   */
   let marker = (
     <Rectangle
       center={latlonCenter}
