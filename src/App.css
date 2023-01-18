@@ -3,10 +3,10 @@
 }
 
 .leaflet-popup-content {
-    margin: 5px 10px;
+    margin: 15px 5px;
 }
 
 .leaflet-popup-content p {
-    font-size: 8px;    
+    font-size: 10px;    
     margin: 0;
 }
