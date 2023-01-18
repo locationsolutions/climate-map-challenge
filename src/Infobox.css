@@ -1,0 +1,38 @@
+#infobox {
+    position: absolute;
+    z-index: 2000;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0px 15px;
+    background-color: #cdcdcd;
+        
+    font-size: 1rem;
+
+    border-radius: 5px;
+}
+
+.infobox__title,
+.infobox__subtitle,
+.infobox__date {
+    margin: 0;
+}
+p::first-child {
+    margin-top: 5px;
+}
+p::last-child {
+    margin-bottom: 5px;
+}
+.infobox__subtitle {
+    font-size: 0.7rem;
+}
+
+.slider__controller {
+    width: 100%;
+}
