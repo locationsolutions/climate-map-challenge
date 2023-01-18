@@ -13,7 +13,7 @@ function convertTimestampToDate(timestamp, locale, options = []) {
         }
       : options;
 
-  return date.toLocaleString(locale, options);
+  return date.toLocaleString(locale, localeOptions);
 }
 
 export default convertTimestampToDate;
