@@ -66,11 +66,17 @@ function App() {
     }
   }, []);
 
+  // TODO: change map style according to the time of day
+  const mapStyleDark =
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  const mapStyleLight =
+    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+
   const position = [65, 26];
   const map = (
     <MapContainer center={position} zoom={6}>
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        url={mapStyleLight}
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
         subdomains="abcd"
         maxZoom={19}

@@ -1,20 +1,20 @@
 import React, { useRef, useState } from "react";
 import convertLocationDataToObject from "../utils/convertLocationDataToObject";
 import "./LocationInfo.css";
+import WeatherData from "./WeatherData";
 
 function LocationInfo({ loc }) {
   const toggleDataInput = useRef(null);
-  const [showElement, setShowElement] = useState(true);
-
-  console.log(
-    `%c DEBUG DATA:\n ${JSON.stringify(loc)} `,
-    "background: #2C2C2C; color: #FF6100"
-  );
+  const [showElement, setShowElement] = useState(false);
 
   const locationObject = convertLocationDataToObject(loc);
   return (
     <div className="container">
       <h2>{loc.info.name}</h2>
+
+      <WeatherData weatherData={locationObject.weatherData} />
+
+      <p />
 
       <div
         id="toggle-data-as-json"
@@ -22,7 +22,7 @@ function LocationInfo({ loc }) {
         ref={toggleDataInput}
         onClick={() => setShowElement(!showElement)}
       >
-        {showElement ? "Hide data" : "Show data"}
+        {showElement ? "Hide raw data" : "Show raw data"}
       </div>
       <div
         id="data-as-json"

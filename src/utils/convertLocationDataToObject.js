@@ -2,8 +2,8 @@ import convertTimestampToDate from "./convertTimestampToDate";
 import mapArrayToChunks from "./mapArrayToChunks";
 import mapValueHighsAndLows from "./mapValueHighsAndLows";
 
-function doDayHighAndLow(loc, forDays = 6) {
-  const dayChunks = mapArrayToChunks(loc.data.r_1h.timeValuePairs, 24);
+function doDayHighAndLow(timeValuePairs, forDays = 6) {
+  const dayChunks = mapArrayToChunks(timeValuePairs, 24);
   const maxDayChunks = dayChunks.filter((item, index) => {
     return index < forDays; // hack to limit amount of days
   });
@@ -22,9 +22,13 @@ function convertLocationDataToObject(loc) {
     name: loc.info.name,
     region: loc.info.region,
     weatherData: {
+      temperature: {
+        units: "°C",
+        highAndLowPerDay: doDayHighAndLow(loc.data.t.timeValuePairs),
+      },
       precipitation: {
         units: loc.data.r_1h.property.unit,
-        highAndLowPerDay: doDayHighAndLow(loc),
+        highAndLowPerDay: doDayHighAndLow(loc.data.r_1h.timeValuePairs),
       },
     },
   };

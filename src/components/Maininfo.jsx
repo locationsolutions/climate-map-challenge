@@ -16,8 +16,7 @@ function MainInfo({ allLocations }) {
   console.log(closestLocationToUser);
 
   useEffect(
-    (c) => {
-      console.log("test:", allLocations, " --- ", userLocation);
+    () => {
       if (userLocation !== null && allLocations.length > 0) {
         setClosestLocationToUser(
           getClosestLocation(
@@ -37,7 +36,7 @@ function MainInfo({ allLocations }) {
           <div className="center">
             <p> Your location:</p>
             <h2 className="move-up">{loc.info.name}</h2>
-            <span className="temperature center">
+            <span className="temperature-front center">
               Latest temperature: <span>{getLatestTemperature(loc)}°C</span>
             </span>
             <p className="info force-bottom">{helpTextLocation}</p>

@@ -43,24 +43,53 @@ body {
   margin-top: -0.7em;
 }
 
+.force-move-up {
+  position: relative;
+  top: -0.85em;
+}
+
 .data {
   font-family: monospace;
   display: block;
   white-space: pre;
   margin: 1em 0px;
+
+  max-height: 380px;
+
+  overflow-y: scroll;
 }
 
 /* Weather data styling */
+.day {
+  font-weight: 400;
+}
 .temperature {
   display: block;
 }
-.temperature span {
+.temperature-front span,
+.precipitation,
+.temperature {
   color: #beedff;
   position: relative;
   font-size: 2.5em;
   font-weight: 900;
 
   top: 0.2em;
+
+  padding-left: 0.12em;
+}
+
+.low {
+  color: #e1ffbe;
+}
+
+.data-block {
+  display: flex;
+}
+
+.item {
+  display: block;
+  flex: 1;
 }
 
 .loader {
@@ -72,6 +101,10 @@ body {
   align-items: center;
 
   z-index: 2000;
+}
+
+.buttons {
+  display: flex;
 }
 
 .loader span {
@@ -88,6 +121,28 @@ body {
   color: #beedff;
 
   text-align: center;
+}
+
+.btn {
+  display: block;
+  width: 75px;
+
+  padding: 5px 15px 5px 15px;
+  margin: 15px;
+
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid #beedff;
+
+  font-size: 0.65em;
+
+  flex: 1;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 
 .info {
