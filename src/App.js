@@ -5,6 +5,8 @@ import { Map, Marker, TileLayer, Popup } from "react-leaflet";
 import styled from "styled-components";
 import L from "leaflet";
 import Sidebar from "./components/Sidebar";
+import mapIcon from "./assets/img/marker-icon.png";
+import mapIconx2 from "./assets/img/marker-icon-2x.png";
 
 const MapContainer = styled(Map)`
   width: calc(100vw - 500px);
@@ -20,6 +22,15 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
+
+// TODO: move these somewhere else...
+const customIcon = L.icon({
+  iconRetinaUrl: mapIconx2,
+  iconUrl: mapIcon,
+  iconSize: [25, 41],
+  iconAnchor: [0, 41],
+  popupAnchor: [12, -20],
 });
 
 function App() {
@@ -85,6 +96,7 @@ function App() {
         <Marker
           position={[loc.position.lat, loc.position.lon]}
           key={loc.info.id}
+          icon={customIcon}
           onClick={() => setSelectedLocation(loc.info.id)}
         >
           <Popup autoPan={true}>
@@ -97,9 +109,12 @@ function App() {
                   double click to open info or
                   <br /> click here:{" "}
                 </span>
-                <button onClick={() => setSelectedLocation(loc.info.id)}>
+                <div
+                  className="btn btn-marker"
+                  onClick={() => setSelectedLocation(loc.info.id)}
+                >
                   Show info
-                </button>
+                </div>
               </span>
             }
           </Popup>
