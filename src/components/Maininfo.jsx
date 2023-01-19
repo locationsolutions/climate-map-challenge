@@ -13,8 +13,6 @@ function MainInfo({ allLocations }) {
     loc = allLocations.find((loc) => loc.info.id === closestLocationToUser.id);
   }
 
-  console.log(closestLocationToUser);
-
   useEffect(
     () => {
       if (userLocation !== null && allLocations.length > 0) {
@@ -46,7 +44,8 @@ function MainInfo({ allLocations }) {
             <h2>No Location Data Available!</h2>
             <p className="info force-bottom">{helpTextLocation}</p>
             <p className="warning move-up">
-              Please enable location permission.
+              Please enable location permission <br />
+              or check your internet connection.
             </p>
           </div>
         )}
@@ -84,7 +83,7 @@ function getLatestTemperature(loc) {
     }
   }
 
-  if (latestLocationTemperature === NaN || latestLocationTemperature === null) {
+  if (isNaN(latestLocationTemperature) || latestLocationTemperature === null) {
     latestLocationTemperature = "N/A";
   }
   return latestLocationTemperature;

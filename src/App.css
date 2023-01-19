@@ -1,3 +1,8 @@
+/* 
+#################################
+TODO: styles are a mess... fix... them...
+*/
+
 body {
   margin: 0;
   padding: 0;
@@ -121,6 +126,19 @@ body {
   color: #beedff;
 
   text-align: center;
+  vertical-align: middle;
+}
+
+.loader span p {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #beedff;
+  font-size: 2.5em;
+  font-weight: 900;
 }
 
 .btn {
@@ -166,6 +184,10 @@ body {
 .warning {
   font-weight: 400;
   color: rgb(255, 187, 0);
+}
+.error,
+div.loader > span > p.error {
+  color: rgb(214, 29, 29);
 }
 
 .force-bottom {

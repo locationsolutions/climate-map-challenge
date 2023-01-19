@@ -43,9 +43,6 @@ function getClosestLocation(location, locations) {
     }
   }
 
-  console.log("Closest Location:", closestLocation);
-  console.log("Distance:", closestDistance, "km");
-
   return closestLocation;
 }
 

@@ -78,8 +78,8 @@ function App() {
   }, []);
 
   // TODO: change map style according to the time of day
-  const mapStyleDark =
-    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  // const mapStyleDark =
+  //   "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
   const mapStyleLight =
     "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
@@ -128,7 +128,11 @@ function App() {
       {loading ? (
         <div className="loader">
           <span>
-            <p>{loadingText}</p>
+            {loadingText.includes("Error") ? (
+              <p className="error">{loadingText}</p>
+            ) : (
+              <p>{loadingText}</p>
+            )}
           </span>
         </div>
       ) : null}
