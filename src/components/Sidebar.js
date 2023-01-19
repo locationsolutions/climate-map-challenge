@@ -7,10 +7,19 @@ import MainInfo from "./Maininfo";
 function Sidebar({ selectedLocationId, observationLocations }) {
   const id = getSelectedLocatoinId(selectedLocationId);
 
+  console.log(observationLocations);
+
   const loc = observationLocations.find((loc) => loc.info.id === id);
+
+  // TODO: close currently shown location info (to go back to MainInfo)
+
   return (
     <div className="sidebar">
-      {loc === undefined ? <MainInfo /> : <LocationInfo loc={loc} />}
+      {loc === undefined ? (
+        <MainInfo allLocations={observationLocations} />
+      ) : (
+        <LocationInfo loc={loc} />
+      )}
     </div>
   );
 }
