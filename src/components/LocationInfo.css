@@ -1,0 +1,6 @@
+#toggle-data-as-json {
+  color: rgb(3, 255, 3);
+}
+#toggle-data-as-json.active {
+  color: rgb(160, 0, 0);
+}
